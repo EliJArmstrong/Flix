@@ -89,7 +89,8 @@ class NowPlayingVC: UIViewController, UITableViewDataSource, UISearchBarDelegate
         let baseURLString = "https://image.tmdb.org/t/p/w500"
         
         let posterURL = URL(string: "\(baseURLString)\(posterPathString)")!
-        cell.posterImg.af_setImage(withURL: posterURL)
+        let placeholderImage = UIImage(named: "now_playing_tabbar_item")!
+        cell.posterImg.af_setImage(withURL: posterURL, placeholderImage: placeholderImage)
         
         return cell
     }
