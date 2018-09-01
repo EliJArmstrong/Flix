@@ -15,12 +15,25 @@ class NowPlayingVC: UIViewController, UITableViewDataSource {
     
     var movies: [[String: Any]] = []
     
+    var refreshControl: UIRefreshControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(NowPlayingVC.didPullToRefresh(_:)), for: .valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
+        
         tableView.dataSource = self
-        
-        
+        fetchMovies()
+    }
+    
+    @objc func didPullToRefresh(_ refreshControl: UIRefreshControl){
+        fetchMovies()
+        self.refreshControl.endRefreshing()
+    }
+    
+    func fetchMovies(){
         let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=b98a0ccc0f9f7eb5813cde80b7af85e3&language=en-US&page=1")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
@@ -36,7 +49,7 @@ class NowPlayingVC: UIViewController, UITableViewDataSource {
                 self.movies = movies
                 
                 self.tableView.reloadData()
-
+                
             }
         }
         task.resume()
@@ -64,10 +77,7 @@ class NowPlayingVC: UIViewController, UITableViewDataSource {
         return cell
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    
 
 
 }
