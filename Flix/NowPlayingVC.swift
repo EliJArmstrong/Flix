@@ -9,24 +9,38 @@
 import UIKit
 import AlamofireImage
 
-class NowPlayingVC: UIViewController, UITableViewDataSource {
+class NowPlayingVC: UIViewController, UITableViewDataSource, UISearchBarDelegate {
 
+    // Outlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var movies: [[String: Any]] = []
-    
+    var filterMovies: [[String: Any]] = []
     var refreshControl: UIRefreshControl!
+    let alertController = UIAlertController(title: "Title", message: "Message", preferredStyle: .alert)
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.startAnimating()
+        
+        let tryAgain = UIAlertAction(title: "Try Again", style: .default) { (action) in
+            self.fetchMovies()
+        }
+        self.alertController.addAction(tryAgain)
         
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(NowPlayingVC.didPullToRefresh(_:)), for: .valueChanged)
         tableView.insertSubview(refreshControl, at: 0)
         
         tableView.dataSource = self
+        searchBar.delegate = self
         fetchMovies()
+        activityIndicator.stopAnimating()
     }
+    
     
     @objc func didPullToRefresh(_ refreshControl: UIRefreshControl){
         fetchMovies()
@@ -41,13 +55,16 @@ class NowPlayingVC: UIViewController, UITableViewDataSource {
         let task = session.dataTask(with: request) { (data, response, error) in
             // This will run when the network request returns
             if let error = error {
+                self.alertController.title = "Cannot Get Movies"
+                self.alertController.message = error.localizedDescription
+                self.present(self.alertController, animated: true){}
                 print(error.localizedDescription)
             } else if let data = data{
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
                 
                 let movies = dataDictionary["results"] as! [[String : Any]]
                 self.movies = movies
-                
+                self.filterMovies = movies
                 self.tableView.reloadData()
                 
             }
@@ -56,12 +73,12 @@ class NowPlayingVC: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movies.count
+        return filterMovies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
-        let movie = movies[indexPath.row]
+        let movie = filterMovies[indexPath.row]
         let title = movie["title"] as! String
         let overview = movie["overview"] as! String
         
@@ -77,8 +94,23 @@ class NowPlayingVC: UIViewController, UITableViewDataSource {
         return cell
     }
 
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
+        
+        self.filterMovies = searchText.isEmpty ? self.movies : movies.filter({ (filteredMovies: [String:Any]) -> Bool in
+            let title = filteredMovies["title"] as! String
+            return title.lowercased().contains(searchText.lowercased())
+        })
+        tableView.reloadData()
+    }
     
-
-
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+    }
 }
 
