@@ -7,11 +7,20 @@
 //
 
 import UIKit
+import AlamofireImage
 
-class NowPlayingVC: UIViewController {
+class NowPlayingVC: UIViewController, UITableViewDataSource {
 
+    @IBOutlet weak var tableView: UITableView!
+    
+    var movies: [[String: Any]] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.dataSource = self
+        
+        
         let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=b98a0ccc0f9f7eb5813cde80b7af85e3&language=en-US&page=1")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
@@ -24,13 +33,35 @@ class NowPlayingVC: UIViewController {
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
                 
                 let movies = dataDictionary["results"] as! [[String : Any]]
-                for movie in movies{
-                    let title = movie["title"] as! String
-                    print(title)
-                }
+                self.movies = movies
+                
+                self.tableView.reloadData()
+
             }
         }
         task.resume()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return movies.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
+        let movie = movies[indexPath.row]
+        let title = movie["title"] as! String
+        let overview = movie["overview"] as! String
+        
+        cell.titleLbl.text = title
+        cell.overviewLbl.text = overview
+        
+        let posterPathString = movie["poster_path"] as! String
+        let baseURLString = "https://image.tmdb.org/t/p/w500"
+        
+        let posterURL = URL(string: "\(baseURLString)\(posterPathString)")!
+        cell.posterImg.af_setImage(withURL: posterURL)
+        
+        return cell
     }
 
     override func didReceiveMemoryWarning() {
