@@ -85,12 +85,18 @@ class NowPlayingVC: UIViewController, UITableViewDataSource, UISearchBarDelegate
         cell.titleLbl.text = title
         cell.overviewLbl.text = overview
         
+        
         let posterPathString = movie["poster_path"] as! String
         let baseURLString = "https://image.tmdb.org/t/p/w500"
         
+        
         let posterURL = URL(string: "\(baseURLString)\(posterPathString)")!
         let placeholderImage = UIImage(named: "now_playing_tabbar_item")!
-        cell.posterImg.af_setImage(withURL: posterURL, placeholderImage: placeholderImage)
+        let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
+            size: cell.posterImg.frame.size,
+            radius: 20.0
+        )
+        cell.posterImg.af_setImage(withURL: posterURL, placeholderImage: placeholderImage, filter: filter, imageTransition: .crossDissolve(0.2))
         
         return cell
     }
