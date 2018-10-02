@@ -10,7 +10,7 @@ import UIKit
 import AlamofireImage
 
 class NowPlayingVC: UIViewController, UITableViewDataSource, UISearchBarDelegate {
-
+    
     // Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -20,7 +20,7 @@ class NowPlayingVC: UIViewController, UITableViewDataSource, UISearchBarDelegate
     var filterMovies: [[String: Any]] = []
     var refreshControl: UIRefreshControl!
     let alertController = UIAlertController(title: "Title", message: "Message", preferredStyle: .alert)
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,7 +100,18 @@ class NowPlayingVC: UIViewController, UITableViewDataSource, UISearchBarDelegate
         
         return cell
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        if let indexPath = tableView.indexPath(for: cell){
+            let moive = movies[indexPath.row]
+            let detailVC = segue.destination as! DetailVC
+            detailVC.movie = moive
+        }
+        
+        
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
         
         self.filterMovies = searchText.isEmpty ? self.movies : movies.filter({ (filteredMovies: [String:Any]) -> Bool in
