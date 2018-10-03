@@ -27,16 +27,20 @@ class MovieCell: UITableViewCell {
         // Configure the view for the selected state
         self.selectionStyle = .none
         
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = UIColor.black
-        self.selectedBackgroundView = backgroundView
         if self.isSelected{
-            self.titleLbl.textColor = UIColor.white
-            self.overviewLbl.textColor = UIColor.white
-        } else{
+            let backgroundView = UIView()
+            backgroundView.backgroundColor = UIColor.white
+            self.selectedBackgroundView = backgroundView
             self.titleLbl.textColor = UIColor.black
             self.overviewLbl.textColor = UIColor.black
+        } else{
+            let backgroundView = UIView()
+            backgroundView.backgroundColor = UIColor.black
+            self.selectedBackgroundView = backgroundView
+            self.titleLbl.textColor = UIColor.white
+            self.overviewLbl.textColor = UIColor.white
         }
+        
     }
 
 }

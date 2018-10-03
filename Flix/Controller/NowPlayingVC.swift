@@ -42,6 +42,13 @@ class NowPlayingVC: UIViewController, UITableViewDataSource, UISearchBarDelegate
     }
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        if let index = self.tableView.indexPathForSelectedRow{
+            self.tableView.deselectRow(at: index, animated: true)
+        }
+    }
+    
+    
     @objc func didPullToRefresh(_ refreshControl: UIRefreshControl){
         fetchMovies()
         self.refreshControl.endRefreshing()
@@ -104,13 +111,14 @@ class NowPlayingVC: UIViewController, UITableViewDataSource, UISearchBarDelegate
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let cell = sender as! UITableViewCell
         if let indexPath = tableView.indexPath(for: cell){
-            let moive = movies[indexPath.row]
+            let moive = filterMovies[indexPath.row]
             let detailVC = segue.destination as! DetailVC
             detailVC.movie = moive
         }
-        
-        
+        searchBar.resignFirstResponder()
     }
+    
+    
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
         
@@ -129,6 +137,8 @@ class NowPlayingVC: UIViewController, UITableViewDataSource, UISearchBarDelegate
         searchBar.showsCancelButton = false
         searchBar.text = ""
         searchBar.resignFirstResponder()
+        self.filterMovies = self.movies
+        tableView.reloadData()
     }
 }
 
