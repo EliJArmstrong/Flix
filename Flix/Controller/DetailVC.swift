@@ -22,6 +22,7 @@ class DetailVC: UIViewController {
         super.viewDidLoad()
 
         if let movie = movie {
+            print(movie)
             titleLbl.text = movie["title"] as? String
             releaseDateLbl.text = movie["release_date"] as? String
             overViewText.text = movie["overview"] as? String
