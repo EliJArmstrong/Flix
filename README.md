@@ -2,6 +2,8 @@
 
 # Project 1 - Flix
 
+ # The code here is from week two's implantation of the Flix project. This just has a recreated of the readme for week one.
+
 Filx is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
 Time spent: 4 hours spent in total
