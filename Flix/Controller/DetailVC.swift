@@ -22,7 +22,6 @@ class DetailVC: UIViewController {
         super.viewDidLoad()
 
         if let movie = movie {
-            print(movie)
             titleLbl.text = movie["title"] as? String
             releaseDateLbl.text = movie["release_date"] as? String
             overViewText.text = movie["overview"] as? String
@@ -36,9 +35,20 @@ class DetailVC: UIViewController {
             let posterPathURL = URL(string: "\(baseURLString)\(posterPathString)")!
             posterImg.af_setImage(withURL: posterPathURL)
         }
-        // Do any additional setup after loading the view.
+        
+        DispatchQueue.main.async {
+            self.overViewText.setContentOffset(.zero, animated: false)
+        }
     }
     
+    
+    // This is so when the phone rotated this will cause the UITextView to go to the top
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        DispatchQueue.main.async {
+            self.overViewText.setContentOffset(.zero, animated: false)
+        }
+    }
 
     /*
     // MARK: - Navigation

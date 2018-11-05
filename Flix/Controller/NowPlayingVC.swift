@@ -39,6 +39,9 @@ class NowPlayingVC: UIViewController, UITableViewDataSource, UISearchBarDelegate
         searchBar.delegate = self
         fetchMovies()
         activityIndicator.stopAnimating()
+        
+        tableView.estimatedRowHeight = 190
+        tableView.rowHeight = UITableView.automaticDimension
     }
     
     
@@ -73,7 +76,6 @@ class NowPlayingVC: UIViewController, UITableViewDataSource, UISearchBarDelegate
                 self.movies = movies
                 self.filterMovies = movies
                 self.tableView.reloadData()
-                
             }
         }
         task.resume()
@@ -107,6 +109,7 @@ class NowPlayingVC: UIViewController, UITableViewDataSource, UISearchBarDelegate
         
         return cell
     }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let cell = sender as! UITableViewCell

@@ -21,17 +21,48 @@ class SuperheroVC: UIViewController, UICollectionViewDataSource, UICollectionVie
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.minimumInteritemSpacing = 5
-        layout.minimumLineSpacing = layout.minimumInteritemSpacing
-        let cellsPerline: CGFloat = 1
-        let interItemSpacingTotal = layout.minimumLineSpacing * (cellsPerline  - 1)
-        let width = collectionView.frame.size.width / cellsPerline - interItemSpacingTotal / cellsPerline
-        
-        layout.itemSize = CGSize(width: width, height: width * 3/2)
-        
+        DispatchQueue.main.async {
+            let layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+            layout.minimumInteritemSpacing = 5
+            layout.minimumLineSpacing = layout.minimumInteritemSpacing
+            let cellsPerline: CGFloat = 2
+            let interItemSpacingTotal = layout.minimumLineSpacing * (cellsPerline  - 1)
+            let width = self.collectionView.frame.size.width / cellsPerline - interItemSpacingTotal / cellsPerline
+            
+            layout.itemSize = CGSize(width: width, height: width * 3/2)
+        }
         fetchMovies()
-        // Do any additional setup after loading the view.
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if self.isViewLoaded {
+            DispatchQueue.main.async {
+                let layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+                layout.minimumInteritemSpacing = 5
+                layout.minimumLineSpacing = layout.minimumInteritemSpacing
+                let cellsPerline: CGFloat = 2
+                let interItemSpacingTotal = layout.minimumLineSpacing * (cellsPerline  - 1)
+                let width = self.collectionView.frame.size.width / cellsPerline - interItemSpacingTotal / cellsPerline
+                
+                layout.itemSize = CGSize(width: width, height: width * 3/2)
+            }
+        }
+    }
+    
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        if self.isViewLoaded {
+            let layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+            layout.minimumInteritemSpacing = 5
+            layout.minimumLineSpacing = layout.minimumInteritemSpacing
+            let cellsPerline: CGFloat = 2
+            let interItemSpacingTotal = layout.minimumLineSpacing * (cellsPerline  - 1)
+            let width = self.collectionView.frame.size.width / cellsPerline - interItemSpacingTotal / cellsPerline
+    
+            layout.itemSize = CGSize(width: width, height: width * 3/2)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
