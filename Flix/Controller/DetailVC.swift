@@ -16,11 +16,19 @@ class DetailVC: UIViewController {
     @IBOutlet weak var releaseDateLbl: UILabel!
     @IBOutlet weak var overViewText: UITextView!
     
+    
     var movie: [String: Any]?
+    
+    var id = String()
+    var videoURL: URL!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        
+        backDropImg.isUserInteractionEnabled = true
+        backDropImg.addGestureRecognizer(tapGestureRecognizer)
+        
         if let movie = movie {
             titleLbl.text = movie["title"] as? String
             releaseDateLbl.text = movie["release_date"] as? String
@@ -28,14 +36,12 @@ class DetailVC: UIViewController {
             let backdropPathString = movie["backdrop_path"] as! String
             let posterPathString = movie["poster_path"] as! String
             let baseURLString = "https://image.tmdb.org/t/p/w500"
-            
             let backdropURL = URL(string: "\(baseURLString)\(backdropPathString)")!
             backDropImg.af_setImage(withURL: backdropURL)
             
             let posterPathURL = URL(string: "\(baseURLString)\(posterPathString)")!
             posterImg.af_setImage(withURL: posterPathURL)
         }
-        
         DispatchQueue.main.async {
             self.overViewText.setContentOffset(.zero, animated: false)
         }
@@ -49,15 +55,19 @@ class DetailVC: UIViewController {
             self.overViewText.setContentOffset(.zero, animated: false)
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        let webViewVC = segue.destination as! WebViewVC
+        webViewVC.id = String(movie!["id"] as! Int)
     }
-    */
-
+    
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+        performSegue(withIdentifier: "ShowWebViewVC", sender: nil)
+    }
+    
+    @IBAction func playBtnPressed(_ sender: Any) {
+        performSegue(withIdentifier: "ShowWebViewVC", sender: nil)
+    }
+    
 }
