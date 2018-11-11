@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B705A16F2198D51100EF9531 /* roundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B705A16E2198D51100EF9531 /* roundedButton.swift */; };
 		B713CFB12162E3C4006DDB06 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B713CFB02162E3C4006DDB06 /* DetailVC.swift */; };
 		B713CFB52162F262006DDB06 /* PosterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B713CFB42162F262006DDB06 /* PosterCell.swift */; };
 		B713CFB72162F292006DDB06 /* SuperheroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B713CFB62162F292006DDB06 /* SuperheroVC.swift */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		4129E9D5929F66CD592076B7 /* Pods-Flix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flix.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flix/Pods-Flix.release.xcconfig"; sourceTree = "<group>"; };
 		8F865D1D3E88E8C07C161098 /* Pods_Flix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B705A16E2198D51100EF9531 /* roundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = roundedButton.swift; sourceTree = "<group>"; };
 		B713CFB02162E3C4006DDB06 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		B713CFB42162F262006DDB06 /* PosterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterCell.swift; sourceTree = "<group>"; };
 		B713CFB62162F292006DDB06 /* SuperheroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperheroVC.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 			children = (
 				B7FEB421213A43FE005484A4 /* MovieCell.swift */,
 				B713CFB42162F262006DDB06 /* PosterCell.swift */,
+				B705A16E2198D51100EF9531 /* roundedButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B705A16F2198D51100EF9531 /* roundedButton.swift in Sources */,
 				B713CFB72162F292006DDB06 /* SuperheroVC.swift in Sources */,
 				B7FEB412213A2A01005484A4 /* NowPlayingVC.swift in Sources */,
 				B713CFB52162F262006DDB06 /* PosterCell.swift in Sources */,

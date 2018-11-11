@@ -11,6 +11,7 @@ import WebKit
 
 class WebViewVC: UIViewController, WKNavigationDelegate {
     
+    @IBOutlet weak var backImg: UIImageView!
     @IBOutlet weak var backLbl: UILabel!
     @IBOutlet weak var loadingLbl: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -21,8 +22,6 @@ class WebViewVC: UIViewController, WKNavigationDelegate {
         super.viewDidLoad()
         webView.isOpaque = false
         webView.navigationDelegate = self
-        let tapGest = UITapGestureRecognizer(target: self, action: #selector(dismiss(animated:completion:)))
-        backLbl.addGestureRecognizer(tapGest)
         fetchData()
     }
     

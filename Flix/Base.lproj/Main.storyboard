@@ -197,7 +197,7 @@
                         <outlet property="posterImg" destination="yXZ-E7-G70" id="eC8-0B-2SR"/>
                         <outlet property="releaseDateLbl" destination="Weu-Q1-WkB" id="K1f-rC-ZVI"/>
                         <outlet property="titleLbl" destination="uyd-ob-AyZ" id="4W2-Yc-PGt"/>
-                        <segue destination="laE-lu-Udd" kind="presentation" identifier="ShowWebViewVC" modalTransitionStyle="partialCurl" id="FQA-ge-AsS"/>
+                        <segue destination="laE-lu-Udd" kind="presentation" identifier="ShowWebViewVC" modalTransitionStyle="flipHorizontal" id="FQA-ge-AsS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kyb-74-EdF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -212,11 +212,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fwz-C4-LoL">
+                            <wkWebView contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Fwz-C4-LoL">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <wkWebViewConfiguration key="configuration">
-                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                <wkWebViewConfiguration key="configuration" allowsInlineMediaPlayback="YES" allowsPictureInPictureMediaPlayback="NO">
+                                    <dataDetectorTypes key="dataDetectorTypes"/>
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" audio="YES" video="YES"/>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
@@ -230,50 +231,57 @@
                                 <rect key="frame" x="188.66666666666666" y="349.66666666666669" width="37" height="37"/>
                                 <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JN8-uh-fNn">
-                                <rect key="frame" x="8" y="76" width="35" height="29"/>
+                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TtN-eN-hor" userLabel="BackBtn" customClass="roundedButton" customModule="Flix" customModuleProvider="target">
+                                <rect key="frame" x="10" y="75" width="90" height="35"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="35" id="JWR-H7-3G6"/>
-                                    <constraint firstAttribute="height" constant="29" id="XR5-cS-G2Y"/>
+                                    <constraint firstAttribute="height" constant="35" id="dlc-pe-QWQ"/>
+                                    <constraint firstAttribute="width" constant="90" id="vbX-vy-gOO"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <state key="normal" image="BackBtn">
-                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
                                 <connections>
-                                    <action selector="closeVC:" destination="laE-lu-Udd" eventType="touchUpInside" id="r2l-26-n16"/>
+                                    <action selector="closeVC:" destination="laE-lu-Udd" eventType="touchUpInside" id="GHx-7s-6jz"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Back" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7RL-3y-ZJK">
-                                <rect key="frame" x="44" y="75.666666666666629" width="61" height="30"/>
+                                <rect key="frame" x="36" y="75" width="64" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="61" id="a7w-lv-Qic"/>
-                                    <constraint firstAttribute="height" constant="30" id="utA-2K-paQ"/>
+                                    <constraint firstAttribute="height" constant="30" id="3Rw-gH-2oa"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackBtn" translatesAutoresizingMaskIntoConstraints="NO" id="CXG-Vf-b75" userLabel="BackImg">
+                                <rect key="frame" x="10" y="77" width="26" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="LA3-Cc-lOa"/>
+                                    <constraint firstAttribute="width" constant="26" id="Z5d-l8-x8R"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="z0z-Fg-xU3" firstAttribute="centerX" secondItem="aCk-M2-bdU" secondAttribute="centerX" id="14u-Dl-4Bk"/>
-                            <constraint firstItem="7RL-3y-ZJK" firstAttribute="centerY" secondItem="JN8-uh-fNn" secondAttribute="centerY" id="31l-ID-WU6"/>
+                            <constraint firstItem="7RL-3y-ZJK" firstAttribute="top" secondItem="UMo-jR-RQ2" secondAttribute="top" constant="55" id="4U6-JG-oSL"/>
                             <constraint firstItem="Fwz-C4-LoL" firstAttribute="leading" secondItem="UMo-jR-RQ2" secondAttribute="leading" id="D4h-Is-PGe"/>
                             <constraint firstItem="Vzz-X5-FLu" firstAttribute="centerY" secondItem="aCk-M2-bdU" secondAttribute="centerY" id="Ha8-JR-UKH"/>
                             <constraint firstItem="Fwz-C4-LoL" firstAttribute="trailing" secondItem="UMo-jR-RQ2" secondAttribute="trailing" id="KTL-54-A7W"/>
-                            <constraint firstItem="JN8-uh-fNn" firstAttribute="top" secondItem="UMo-jR-RQ2" secondAttribute="top" constant="56" id="MON-mK-tUZ"/>
+                            <constraint firstItem="7RL-3y-ZJK" firstAttribute="leading" secondItem="CXG-Vf-b75" secondAttribute="trailing" id="MvS-sW-lpf"/>
                             <constraint firstItem="z0z-Fg-xU3" firstAttribute="centerY" secondItem="aCk-M2-bdU" secondAttribute="centerY" constant="-100" id="Rbo-XV-v2V"/>
+                            <constraint firstItem="CXG-Vf-b75" firstAttribute="top" secondItem="UMo-jR-RQ2" secondAttribute="top" constant="57" id="TZy-Y6-2sm"/>
                             <constraint firstItem="Fwz-C4-LoL" firstAttribute="top" secondItem="aCk-M2-bdU" secondAttribute="top" id="Y3x-aD-Pbp"/>
-                            <constraint firstItem="7RL-3y-ZJK" firstAttribute="leading" secondItem="JN8-uh-fNn" secondAttribute="trailing" constant="1" id="gA9-nB-Q7Z"/>
+                            <constraint firstItem="CXG-Vf-b75" firstAttribute="leading" secondItem="UMo-jR-RQ2" secondAttribute="leading" constant="10" id="dLE-v1-pRq"/>
+                            <constraint firstItem="TtN-eN-hor" firstAttribute="leading" secondItem="UMo-jR-RQ2" secondAttribute="leading" constant="10" id="lhm-rz-uLd"/>
+                            <constraint firstItem="TtN-eN-hor" firstAttribute="top" secondItem="UMo-jR-RQ2" secondAttribute="top" constant="55" id="mqJ-v7-nNG"/>
                             <constraint firstItem="Vzz-X5-FLu" firstAttribute="centerX" secondItem="aCk-M2-bdU" secondAttribute="centerX" id="wnP-31-eW8"/>
-                            <constraint firstItem="JN8-uh-fNn" firstAttribute="leading" secondItem="UMo-jR-RQ2" secondAttribute="leading" constant="8" id="xQL-IX-JKd"/>
                             <constraint firstItem="Fwz-C4-LoL" firstAttribute="bottom" secondItem="UMo-jR-RQ2" secondAttribute="bottom" id="xh3-Zb-mQa"/>
+                            <constraint firstItem="7RL-3y-ZJK" firstAttribute="trailing" secondItem="TtN-eN-hor" secondAttribute="trailing" id="zoJ-ds-9cX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UMo-jR-RQ2"/>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="Vzz-X5-FLu" id="cou-hs-hGp"/>
+                        <outlet property="backImg" destination="CXG-Vf-b75" id="5kD-Oa-CFf"/>
                         <outlet property="backLbl" destination="7RL-3y-ZJK" id="5vy-aC-wGs"/>
                         <outlet property="loadingLbl" destination="z0z-Fg-xU3" id="jWb-zg-Gs9"/>
                         <outlet property="webView" destination="Fwz-C4-LoL" id="AxD-rc-33z"/>
