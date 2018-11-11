@@ -84,17 +84,18 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="7dY-Mb-X4L">
-                                <rect key="frame" x="169" y="315" width="37" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="color" red="0.1456945425" green="0.1456945425" blue="0.1456945425" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="7dY-Mb-X4L">
+                                <rect key="frame" x="188.66666666666666" y="349.66666666666669" width="37" height="37"/>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="NtP-U8-Cwy" firstAttribute="leading" secondItem="cMX-aQ-0aJ" secondAttribute="leading" id="1TU-Rl-xf4"/>
+                            <constraint firstItem="7dY-Mb-X4L" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3rU-qv-tHc"/>
                             <constraint firstItem="NtP-U8-Cwy" firstAttribute="bottom" secondItem="cMX-aQ-0aJ" secondAttribute="bottom" id="HEE-Tg-7G2"/>
                             <constraint firstItem="NtP-U8-Cwy" firstAttribute="trailing" secondItem="cMX-aQ-0aJ" secondAttribute="trailing" id="QJq-EV-w1n"/>
+                            <constraint firstItem="7dY-Mb-X4L" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Yqq-Q1-Dbe"/>
                             <constraint firstItem="NtP-U8-Cwy" firstAttribute="top" secondItem="cMX-aQ-0aJ" secondAttribute="top" id="jgR-Cf-OMQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cMX-aQ-0aJ"/>

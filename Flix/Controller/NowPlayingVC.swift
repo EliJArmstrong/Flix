@@ -22,9 +22,9 @@ class NowPlayingVC: UIViewController, UITableViewDataSource, UISearchBarDelegate
     let alertController = UIAlertController(title: "Title", message: "Message", preferredStyle: .alert)
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        activityIndicator.startAnimating()
         
         let tryAgain = UIAlertAction(title: "Try Again", style: .default) { (action) in
             self.fetchMovies()
@@ -38,7 +38,6 @@ class NowPlayingVC: UIViewController, UITableViewDataSource, UISearchBarDelegate
         tableView.dataSource = self
         searchBar.delegate = self
         fetchMovies()
-        activityIndicator.stopAnimating()
         
         tableView.estimatedRowHeight = 190
         tableView.rowHeight = UITableView.automaticDimension
@@ -76,6 +75,7 @@ class NowPlayingVC: UIViewController, UITableViewDataSource, UISearchBarDelegate
                 self.movies = movies
                 self.filterMovies = movies
                 self.tableView.reloadData()
+                self.activityIndicator.stopAnimating()
             }
         }
         task.resume()
