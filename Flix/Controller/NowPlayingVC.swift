@@ -53,7 +53,6 @@ class NowPlayingVC: UIViewController, UITableViewDataSource, UISearchBarDelegate
     
     @objc func didPullToRefresh(_ refreshControl: UIRefreshControl){
         fetchMovies()
-        self.refreshControl.endRefreshing()
     }
     
     func fetchMovies(){
@@ -75,6 +74,7 @@ class NowPlayingVC: UIViewController, UITableViewDataSource, UISearchBarDelegate
                 self.movies = movies
                 self.filterMovies = movies
                 self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
                 self.activityIndicator.stopAnimating()
             }
         }
