@@ -66,8 +66,4 @@ class DetailVC: UIViewController {
         performSegue(withIdentifier: "ShowWebViewVC", sender: nil)
     }
     
-    @IBAction func playBtnPressed(_ sender: Any) {
-        performSegue(withIdentifier: "ShowWebViewVC", sender: nil)
-    }
-    
 }

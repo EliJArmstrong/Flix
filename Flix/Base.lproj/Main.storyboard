@@ -157,20 +157,17 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" alpha="0.65000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uas-k8-X7l">
-                                <rect key="frame" x="112.66666666666669" y="114.66666666666669" width="189" height="144"/>
+                            <imageView userInteractionEnabled="NO" alpha="0.65000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play-button" translatesAutoresizingMaskIntoConstraints="NO" id="h44-fY-41s">
+                                <rect key="frame" x="129" y="126.33333333333331" width="156" height="121"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="189" id="brb-zI-ebS"/>
-                                    <constraint firstAttribute="height" constant="144" id="ecG-NE-2k2"/>
+                                    <constraint firstAttribute="width" constant="156" id="8vy-cD-htk"/>
+                                    <constraint firstAttribute="height" constant="121" id="NdS-DB-pXf"/>
                                 </constraints>
-                                <state key="normal" image="play-button"/>
-                                <connections>
-                                    <action selector="playBtnPressed:" destination="a5V-pR-wXB" eventType="touchUpInside" id="YKP-mA-GU2"/>
-                                </connections>
-                            </button>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="h44-fY-41s" firstAttribute="centerX" secondItem="5aI-Ky-otm" secondAttribute="centerX" id="1cd-WX-eB0"/>
                             <constraint firstItem="uyd-ob-AyZ" firstAttribute="centerY" secondItem="yXZ-E7-G70" secondAttribute="centerY" constant="33" id="7Nz-ac-T6u"/>
                             <constraint firstItem="5aI-Ky-otm" firstAttribute="height" secondItem="laF-xO-kX5" secondAttribute="height" multiplier="0.333333" id="D2j-gL-WKC"/>
                             <constraint firstItem="Krw-zD-xMo" firstAttribute="trailing" secondItem="Weu-Q1-WkB" secondAttribute="trailing" constant="16" id="J0l-FJ-Hkp"/>
@@ -179,7 +176,7 @@
                             <constraint firstItem="yXZ-E7-G70" firstAttribute="leading" secondItem="Krw-zD-xMo" secondAttribute="leading" constant="16" id="PTK-TB-42l"/>
                             <constraint firstItem="Krw-zD-xMo" firstAttribute="bottom" secondItem="1Pr-La-W7Y" secondAttribute="bottom" constant="16" id="Qwf-qd-Sbi"/>
                             <constraint firstItem="Krw-zD-xMo" firstAttribute="trailing" secondItem="uyd-ob-AyZ" secondAttribute="trailing" constant="16" id="Qz1-vj-xAK"/>
-                            <constraint firstItem="Uas-k8-X7l" firstAttribute="centerX" secondItem="5aI-Ky-otm" secondAttribute="centerX" id="bnl-Sk-83T"/>
+                            <constraint firstItem="h44-fY-41s" firstAttribute="centerY" secondItem="5aI-Ky-otm" secondAttribute="centerY" id="SCD-96-Nr9"/>
                             <constraint firstItem="uyd-ob-AyZ" firstAttribute="leading" secondItem="yXZ-E7-G70" secondAttribute="trailing" constant="8" id="der-oO-WrM"/>
                             <constraint firstItem="1Pr-La-W7Y" firstAttribute="leading" secondItem="Krw-zD-xMo" secondAttribute="leading" constant="16" id="e5H-5X-3d1"/>
                             <constraint firstItem="yXZ-E7-G70" firstAttribute="centerY" secondItem="5aI-Ky-otm" secondAttribute="bottom" id="fst-UL-gbR"/>
@@ -187,7 +184,6 @@
                             <constraint firstItem="Krw-zD-xMo" firstAttribute="trailing" secondItem="1Pr-La-W7Y" secondAttribute="trailing" constant="16" id="ka5-a9-QIm"/>
                             <constraint firstItem="5aI-Ky-otm" firstAttribute="top" secondItem="Krw-zD-xMo" secondAttribute="top" id="lgp-ch-Ct3"/>
                             <constraint firstItem="Krw-zD-xMo" firstAttribute="trailing" secondItem="5aI-Ky-otm" secondAttribute="trailing" id="nPX-0d-tzn"/>
-                            <constraint firstItem="Uas-k8-X7l" firstAttribute="centerY" secondItem="5aI-Ky-otm" secondAttribute="centerY" id="o0n-p9-6iy"/>
                             <constraint firstItem="1Pr-La-W7Y" firstAttribute="top" secondItem="yXZ-E7-G70" secondAttribute="bottom" constant="8" id="tES-yP-YGI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Krw-zD-xMo"/>
@@ -217,7 +213,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <wkWebViewConfiguration key="configuration" allowsInlineMediaPlayback="YES" allowsPictureInPictureMediaPlayback="NO">
-                                    <dataDetectorTypes key="dataDetectorTypes"/>
+                                    <dataDetectorTypes key="dataDetectorTypes" none="YES"/>
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" audio="YES" video="YES"/>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
