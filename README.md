@@ -74,7 +74,8 @@ The following **stretch** features are implemented:
 
 The following **additional** features are implemented:
 
-- [x] Only the video is loaded in the tailerVC
+- [x] Only the video is loaded in the tailerVC.
+- [x] Placed the detail text in the details view in a scroolable text box. So, the user is able to read the full overview.
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
