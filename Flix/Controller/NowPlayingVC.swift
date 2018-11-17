@@ -16,8 +16,8 @@ class NowPlayingVC: UIViewController, UITableViewDataSource, UISearchBarDelegate
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var movies: [[String: Any]] = []
-    var filterMovies: [[String: Any]] = []
+    var movies = [[String: Any]]()
+    var filterMovies = [[String: Any]]()
     var refreshControl: UIRefreshControl!
     let alertController = UIAlertController(title: "Title", message: "Message", preferredStyle: .alert)
     
