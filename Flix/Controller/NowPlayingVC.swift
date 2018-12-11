@@ -16,8 +16,8 @@ class NowPlayingVC: UIViewController, UITableViewDataSource, UISearchBarDelegate
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var movies = [[String: Any]]()
-    var filterMovies = [[String: Any]]()
+    var movies = [Movie]()
+    var filterMovies = [Movie]()
     var refreshControl: UIRefreshControl!
     let alertController = UIAlertController(title: "Title", message: "Message", preferredStyle: .alert)
     
@@ -56,21 +56,13 @@ class NowPlayingVC: UIViewController, UITableViewDataSource, UISearchBarDelegate
     }
     
     func fetchMovies(){
-        let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=b98a0ccc0f9f7eb5813cde80b7af85e3&language=en-US&page=1")!
-        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
-        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
-        
-        let task = session.dataTask(with: request) { (data, response, error) in
-            // This will run when the network request returns
-            if let error = error {
+        MovieApiManager().nowPlayingMovies { (movies, error) in
+            if let error = error{
                 self.alertController.title = "Cannot Get Movies"
                 self.alertController.message = error.localizedDescription
                 self.present(self.alertController, animated: true){}
                 print(error.localizedDescription)
-            } else if let data = data{
-                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
-                
-                let movies = dataDictionary["results"] as! [[String : Any]]
+            } else if let movies = movies{
                 self.movies = movies
                 self.filterMovies = movies
                 self.tableView.reloadData()
@@ -78,7 +70,6 @@ class NowPlayingVC: UIViewController, UITableViewDataSource, UISearchBarDelegate
                 self.activityIndicator.stopAnimating()
             }
         }
-        task.resume()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -87,26 +78,7 @@ class NowPlayingVC: UIViewController, UITableViewDataSource, UISearchBarDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
-        let movie = filterMovies[indexPath.row]
-        let title = movie["title"] as! String
-        let overview = movie["overview"] as! String
-        
-        cell.titleLbl.text = title
-        cell.overviewLbl.text = overview
-        
-        
-        let posterPathString = movie["poster_path"] as! String
-        let baseURLString = "https://image.tmdb.org/t/p/w500"
-        
-        
-        let posterURL = URL(string: "\(baseURLString)\(posterPathString)")!
-        let placeholderImage = UIImage(named: "launch_image")!
-        let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
-            size: cell.posterImg.frame.size,
-            radius: 20.0
-        )
-        cell.posterImg.af_setImage(withURL: posterURL, placeholderImage: placeholderImage, filter: filter, imageTransition: .crossDissolve(0.2))
-        
+        cell.movie = filterMovies[indexPath.row]
         return cell
     }
     
@@ -125,8 +97,8 @@ class NowPlayingVC: UIViewController, UITableViewDataSource, UISearchBarDelegate
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
         
-        self.filterMovies = searchText.isEmpty ? self.movies : movies.filter({ (filteredMovies: [String:Any]) -> Bool in
-            let title = filteredMovies["title"] as! String
+        self.filterMovies = searchText.isEmpty ? self.movies : movies.filter({ (filteredMovies: Movie) -> Bool in
+            let title = filteredMovies.title
             return title.lowercased().contains(searchText.lowercased())
         })
         tableView.reloadData()

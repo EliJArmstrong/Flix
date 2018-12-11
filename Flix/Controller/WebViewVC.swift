@@ -16,7 +16,7 @@ class WebViewVC: UIViewController, WKNavigationDelegate {
     @IBOutlet weak var loadingLbl: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var webView: WKWebView!
-    var id = String()
+    var id: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,25 +33,9 @@ class WebViewVC: UIViewController, WKNavigationDelegate {
     }
     
     func fetchData(){
-        let url = URL(string: "https://api.themoviedb.org/3/movie/\(id)/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US?autoplay=1")!
-        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
-        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
-        
-        let task = session.dataTask(with: request) { (data, response, error) in
-            // This will run when the network request returns
-            if let error = error {
-                print(error.localizedDescription)
-            } else if let data = data{
-                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
-                
-                let trailerInfo = dataDictionary["results"] as! [[String : Any]]
-                let firstTrailerInfo = trailerInfo[0] as [String:Any]
-                let key = firstTrailerInfo["key"] as! String
-                let url = URL(string: "https://www.youtube.com/embed/\(key)")!
-                self.webView.load(URLRequest(url: url))
-            }
+        MovieApiManager().youTubeUrl(id: id!) { (url, error) in
+            self.webView.load(URLRequest(url: url!))
         }
-        task.resume()
     }
     
     @IBAction func closeVC(_ sender: Any) {

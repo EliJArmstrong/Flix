@@ -9,18 +9,15 @@
 import UIKit
 
 class DetailVC: UIViewController {
-
+    
     @IBOutlet weak var backDropImg: UIImageView!
     @IBOutlet weak var posterImg: UIImageView!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var releaseDateLbl: UILabel!
     @IBOutlet weak var overViewText: UITextView!
     
+    var movie: Movie?
     
-    var movie: [String: Any]?
-    
-    var id = String()
-    var videoURL: URL!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,18 +27,13 @@ class DetailVC: UIViewController {
         backDropImg.addGestureRecognizer(tapGestureRecognizer)
         
         if let movie = movie {
-            titleLbl.text = movie["title"] as? String
-            releaseDateLbl.text = movie["release_date"] as? String
-            overViewText.text = movie["overview"] as? String
-            let backdropPathString = movie["backdrop_path"] as! String
-            let posterPathString = movie["poster_path"] as! String
-            let baseURLString = "https://image.tmdb.org/t/p/w500"
-            let backdropURL = URL(string: "\(baseURLString)\(backdropPathString)")!
-            backDropImg.af_setImage(withURL: backdropURL)
-            
-            let posterPathURL = URL(string: "\(baseURLString)\(posterPathString)")!
-            posterImg.af_setImage(withURL: posterPathURL)
+            titleLbl.text = movie.title
+            releaseDateLbl.text = movie.releaseDate
+            overViewText.text = movie.overview
+            backDropImg.af_setImage(withURL: movie.backDropURl!)
+            posterImg.af_setImage(withURL: movie.posterUrl!)
         }
+        
         DispatchQueue.main.async {
             self.overViewText.setContentOffset(.zero, animated: false)
         }
@@ -58,7 +50,7 @@ class DetailVC: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let webViewVC = segue.destination as! WebViewVC
-        webViewVC.id = String(movie!["id"] as! Int)
+        webViewVC.id = movie?.id ?? 42
     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)

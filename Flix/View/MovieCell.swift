@@ -7,15 +7,28 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class MovieCell: UITableViewCell {
     
+    var movie: Movie!{
+        didSet{
+            titleLbl.text = movie.title
+            overviewLbl.text = movie.overview
+            let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
+                size: self.posterImg.frame.size,
+                radius: 20.0
+            )
+            posterImg.af_setImage(withURL: movie.posterUrl!, placeholderImage: placeholderImage, filter: filter, imageTransition: .crossDissolve(0.2))
+        }
+    }
     
     @IBOutlet weak var titleLbl: UILabel!
-    
     @IBOutlet weak var overviewLbl: UILabel!
-    
     @IBOutlet weak var posterImg: UIImageView!
+    
+    let placeholderImage = UIImage(named: "launch_image")!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
